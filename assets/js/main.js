@@ -1,48 +1,46 @@
 /*=============== SHOW MENU ===============*/
 const navMenu = document.getElementById('nav-menu'),
       navToggle = document.getElementById('nav-toggle'),
-      navClose = document.getElementById('nav-close')
+      navClose = document.getElementById('nav-close');
 
-/*=============== MENU SHOW =====*/
-/* Validate if constant exists */
+/* Menu show */
 if(navToggle){
     navToggle.addEventListener('click', () =>{
-        navMenu.classList.add('show-menu')
-    })
-}
-
-/*=============== MENU HIDDEN =====*/
-/* Validate if constant exists */
-if(navClose){
-    navClose.addEventListener('click', () =>{
-        navMenu.classList.remove('show-menu')
+        navMenu.classList.add('show-menu');
     })
 }
 
 /*=============== REMOVE MENU MOBILE ===============*/
-const navLink = document.querySelectorAll('.nav__link')
-
-const linkAction = () =>{
-    const navMenu = document.getElementById('nav-menu')
-    // When we click on each nav__link, we remove the show-menu class
-    navMenu.classList.remove('show-menu')
+/*validate of constant exist*/
+/* Menu hidden */
+if(navClose){
+    navClose.addEventListener('click', () =>{
+        navMenu.classList.remove('show-menu');
+    })
 }
-navLink.forEach(n => n.addEventListener('click', linkAction))
+
+const navLink = document.querySelectorAll('.nav__link');
+
+const linkAction = () => {
+    const navMenu = document.getElementById('nav-menu');
+    navMenu.classList.remove('show-menu');
+}
+navLink.forEach(n => n.addEventListener('click', linkAction));
+
 
 /*=============== CHANGE BACKGROUND HEADER ===============*/
 const scrollHeader = () =>{
     const header = document.getElementById('header')
-    // When the scroll is greater than 50 viewport height, add the scroll-header class to the header tag
+    // Add a class if the bottom offset is greater than 50 of the viewport
     this.scrollY >= 50 ? header.classList.add('bg-header') 
                        : header.classList.remove('bg-header')
 }
-window.addEventListener('scroll', scrollHeader)
 
 /*=============== SCROLL SECTIONS ACTIVE LINK ===============*/
 const sections = document.querySelectorAll('section[id]')
     
 const scrollActive = () =>{
-  	const scrollY = window.pageYOffset
+  	const scrollDown = window.scrollY
 
 	sections.forEach(current =>{
 		const sectionHeight = current.offsetHeight,
@@ -50,7 +48,7 @@ const scrollActive = () =>{
 			  sectionId = current.getAttribute('id'),
 			  sectionsClass = document.querySelector('.nav__menu a[href*=' + sectionId + ']')
 
-		if(scrollY > sectionTop && scrollY <= sectionTop + sectionHeight){
+		if(scrollDown > sectionTop && scrollDown <= sectionTop + sectionHeight){
 			sectionsClass.classList.add('active-link')
 		}else{
 			sectionsClass.classList.remove('active-link')
@@ -74,13 +72,13 @@ const sr = ScrollReveal({
     distance: '60px',
     duration: 2500,
     delay: 400,
-    // reset: true // Animations repeat
+    // reset: true // animations repeat
 })
-  
+
 sr.reveal(`.home__data, .footer__content, .footer__logo, .footer__description`)
 sr.reveal(`.home__tree-1`, {origin: 'left', delay: 800})
 sr.reveal(`.home__tree-2`, {origin: 'right', delay: 800})
 sr.reveal(`.home__img`, {delay: 800})
-sr.reveal(`.category__card, .items__card`, {interval: 100})
-sr.reveal(`.about__img, .about__data, .footer__tree-2`, {origin: 'left'})
-sr.reveal(`.party__images, .party__data, .footer__tree-1`, {origin: 'right'})
+sr.reveal(`.category__card, .about__data`, {interval: 100})
+sr.reveal(`.about__img, .about__data .footer__tree-2`, {origin: 'left'})
+sr.reveal(`.party__images, .party__data .footer__tree-1`, {origin: 'right'})
